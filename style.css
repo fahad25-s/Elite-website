@@ -137,24 +137,52 @@ address { font-style: normal; }
   display: flex;
   align-items: center;
   gap: 16px;
-  padding-block: 12px;
+  padding-block: 10px;
 }
-.header-logo {
-  color: var(--teal-600);
-  flex-shrink: 0;
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
 }
 .logo-icon {
   width: 36px;
   height: 36px;
+  color: var(--teal-600);
+  flex-shrink: 0;
 }
 .logo-icon-sm {
   width: 28px;
   height: 28px;
 }
+.header-brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.header-name {
+  font-size: clamp(0.78rem, 2.2vw, 1rem);
+  font-weight: 700;
+  color: var(--teal-700);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header-slogan {
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  color: var(--slate-500);
+  line-height: 1.3;
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .header-nav {
   display: flex;
   gap: 4px;
-  margin-left: auto;
+  flex-shrink: 0;
 }
 .nav-link {
   font-size: 0.88rem;
@@ -168,10 +196,6 @@ address { font-style: normal; }
   color: var(--teal-600);
   background: var(--teal-50);
 }
-.header-call {
-  flex-shrink: 0;
-  margin-left: 8px;
-}
 
 /* ═══════════════════════════════════════════════
    HERO
@@ -179,46 +203,31 @@ address { font-style: normal; }
 .hero {
   background: linear-gradient(135deg, var(--teal-700) 0%, var(--teal-500) 100%);
   color: var(--white);
-  padding-block: clamp(28px, 6vw, 52px);
+  padding-block: clamp(32px, 7vw, 60px);
   text-align: center;
 }
 .hero-inner {
   max-width: 860px;
 }
 .hero-title {
-  /* Scale down aggressively on small screens to stay one line */
-  font-size: clamp(1rem, 4.2vw, 2rem);
+  font-size: clamp(1.3rem, 3.8vw, 2.4rem);
   font-weight: 700;
-  line-height: 1.25;
-  margin-bottom: 6px;
+  line-height: 1.2;
+  margin-bottom: 8px;
   color: var(--white);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
 }
 .hero-title-bn {
-  font-size: clamp(0.9rem, 2.8vw, 1.1rem);
+  font-size: clamp(1rem, 2.6vw, 1.3rem);
   font-weight: 500;
-  color: rgba(255,255,255,.85);
-  margin-bottom: 20px;
+  color: rgba(255,255,255,.9);
+  margin-bottom: 14px;
 }
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.hero-actions .btn-primary {
-  background: var(--white);
-  color: var(--teal-700);
-  border-color: var(--white);
-  font-size: 0.95rem;
-  padding: 11px 24px;
-}
-.hero-actions .btn-primary:hover {
-  background: var(--teal-50);
-  border-color: var(--teal-50);
-  box-shadow: 0 4px 18px rgba(0,0,0,.15);
+.hero-slogan {
+  font-size: clamp(0.82rem, 2vw, 1rem);
+  color: rgba(255,255,255,.75);
+  font-style: italic;
+  margin-bottom: 0;
 }
 
 /* ═══════════════════════════════════════════════
@@ -263,7 +272,8 @@ address { font-style: normal; }
 }
 .doctor-card-photo {
   width: 100%;
-  height: 200px;
+  height: 190px;
+  max-height: 190px;
   object-fit: cover;
   object-position: center top;
   display: block;
@@ -272,7 +282,8 @@ address { font-style: normal; }
 /* Placeholder: compact medical cross icon, no large silhouette */
 .doctor-card-photo-placeholder {
   width: 100%;
-  height: 200px;
+  height: 190px;
+  max-height: 190px;
   background: var(--teal-100);
   display: flex;
   flex-direction: column;
@@ -671,7 +682,10 @@ address { font-style: normal; }
 ═══════════════════════════════════════════════ */
 @media (max-width: 639px) {
   .header-nav {
-    display: none; /* nav hidden on small screens — call button is primary */
+    display: none;
+  }
+  .header-slogan {
+    display: none; /* mobile-এ শুধু নাম দেখাবে */
   }
   .detail-card {
     flex-direction: column;
