@@ -220,48 +220,58 @@ function renderTests() {
 /* ════════════════════════════════════════════════
    RENDER: DOCTOR CARDS (carousel)
 ════════════════════════════════════════════════ */
-function photoOrPlaceholder(photo, name, cssClass) {
-  if (photo) {
-    return `<img src="${photo}" alt="${name}" class="${cssClass}"
-             onerror="this.parentNode.innerHTML='${placeholderSVG()}'"
-           />`;
-  }
-  return placeholderSVG();
+function placeholderHTML() {
+  return '<div class="doctor-card-photo-placeholder">'
+    + '<svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">'
+    + '<circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>'
+    + '<path d="M16 9v14M9 16h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>'
+    + '</svg>'
+    + '<span>ছবি আসছে</span>'
+    + '</div>';
 }
 
-function placeholderSVG() {
-  return `<div class="doctor-card-photo-placeholder">
-    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
-      <path d="M16 9v14M9 16h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <span>ছবি আসছে</span>
-  </div>`;
+function buildCard(doc, index) {
+  const photoSection = doc.photo
+    ? '<img src="' + doc.photo + '" alt="' + doc.name + '" class="doctor-card-photo" data-fallback="' + index + '" />'
+    : placeholderHTML();
+
+  const degreeHTML = doc.degree ? doc.degree.replace(/\n/g, '<br>') : '';
+  const specialtyHTML = doc.specialty
+    ? '<p class="doctor-card-specialty">' + doc.specialty + '</p>'
+    : '';
+
+  return '<div class="doctor-card" data-index="' + index + '" role="button" tabindex="0" aria-label="' + doc.name + ' — বিস্তারিত দেখুন">'
+    + photoSection
+    + '<div class="doctor-card-body">'
+    + '<p class="doctor-card-name">' + doc.name + '</p>'
+    + (degreeHTML ? '<p class="doctor-card-degree">' + degreeHTML + '</p>' : '')
+    + specialtyHTML
+    + '<span class="doctor-card-cta">বিস্তারিত দেখুন →</span>'
+    + '</div>'
+    + '</div>';
 }
 
 function renderDoctorCards() {
   const track = document.getElementById("carouselTrack");
   if (!track) return;
-  track.innerHTML = DOCTORS.map((doc, i) => `
-    <div class="doctor-card" data-index="${i}" role="button" tabindex="0"
-         aria-label="${doc.name} — বিস্তারিত দেখুন">
-      ${doc.photo
-        ? `<img src="${doc.photo}" alt="${doc.name}" class="doctor-card-photo"
-               onerror="this.parentNode.innerHTML=\`${placeholderSVG()}\`"/>`
-        : placeholderSVG()}
-      <div class="doctor-card-body">
-        <p class="doctor-card-name">${doc.name}</p>
-        <p class="doctor-card-degree">${doc.degree.replace(/\n/g, "<br>")}</p>
-        ${doc.specialty ? `<p class="doctor-card-specialty">${doc.specialty}</p>` : ""}
-        <span class="doctor-card-cta">বিস্তারিত দেখুন →</span>
-      </div>
-    </div>
-  `).join("");
+
+  track.innerHTML = DOCTORS.map((doc, i) => buildCard(doc, i)).join("");
+
+  // Fix broken images after render (no nested backtick problem)
+  track.querySelectorAll("img.doctor-card-photo[data-fallback]").forEach(img => {
+    img.addEventListener("error", function() {
+      const idx = this.getAttribute("data-fallback");
+      // Replace only the img with placeholder, keep card-body intact
+      this.outerHTML = placeholderHTML();
+    }, { once: true });
+  });
 
   // Attach click + keyboard
   track.querySelectorAll(".doctor-card").forEach(card => {
     card.addEventListener("click",  () => openDetail(+card.dataset.index));
-    card.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openDetail(+card.dataset.index); });
+    card.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") openDetail(+card.dataset.index);
+    });
   });
 
   renderDots();
@@ -351,9 +361,18 @@ function openDetail(index) {
   // Photo
   const photoWrap = document.querySelector(".detail-photo-wrap");
   if (doc.photo) {
-    photoWrap.innerHTML = `<img id="detailPhoto" src="${doc.photo}" alt="${doc.name}" class="detail-photo" onerror="this.parentNode.innerHTML='<div class=\'detail-photo-placeholder\'>${placeholderSVG()}</div>'" />`;
+    const img = document.createElement("img");
+    img.id = "detailPhoto";
+    img.src = doc.photo;
+    img.alt = doc.name;
+    img.className = "detail-photo";
+    img.addEventListener("error", function() {
+      photoWrap.innerHTML = '<div class="detail-photo-placeholder">' + placeholderHTML() + '</div>';
+    }, { once: true });
+    photoWrap.innerHTML = "";
+    photoWrap.appendChild(img);
   } else {
-    photoWrap.innerHTML = `<div class="detail-photo-placeholder">${placeholderSVG()}</div>`;
+    photoWrap.innerHTML = '<div class="detail-photo-placeholder">' + placeholderHTML() + '</div>';
   }
 
   setText("detailName",     doc.name);
