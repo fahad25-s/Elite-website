@@ -224,7 +224,7 @@ address { font-style: normal; }
   margin-bottom: 14px;
 }
 .hero-slogan {
-  font-size: clamp(0.82rem, 2vw, 1rem);
+  font-size: clamp(0.80rem, 2vw, 1rem);
   color: rgba(255,255,255,.75);
   font-style: italic;
   margin-bottom: 0;
