@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elite Diagnostic Center & Physiotherapy</title>
+  <meta name="description" content="বিশ্বস্ত ডায়াগনস্টিক ও ফিজিওথেরাপি সেবা — মার্ভেলাস টাওয়ার, গোলাপগঞ্জ, সিলেট" />
+
+  <!-- Bengali + Latin font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HEADER / HERO
+  ═══════════════════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner container">
+      <div class="header-logo">
+        <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 10v20M10 20h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <nav class="header-nav">
+        <a href="#doctors" class="nav-link">ডাক্তারগণ</a>
+        <a href="#services" class="nav-link">সেবা</a>
+        <a href="#contact" class="nav-link">যোগাযোগ</a>
+      </nav>
+      <a href="tel:01337273083" class="btn btn-primary btn-sm header-call">কল করুন</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <h1 class="hero-title">Elite Diagnostic Center &amp; Physiotherapy</h1>
+      <p class="hero-title-bn">এলিট ডায়াগনস্টিক সেন্টার এন্ড ফিজিওথেরাপি</p>
+      <div class="hero-actions">
+        <a href="tel:01337273083" class="btn btn-primary">এখনই কল করুন — ০১৩৩৭-২৭৩০৮৩</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DOCTORS SECTION
+  ═══════════════════════════════════════ -->
+  <section class="section" id="doctors">
+    <div class="container">
+      <h2 class="section-title">আমাদের ডাক্তারগণ</h2>
+      <p class="section-sub">বিশেষজ্ঞ চিকিৎসক দলের সাথে পরামর্শ করুন</p>
+
+      <!-- Doctor List View -->
+      <div id="doctor-list-view">
+        <div class="carousel-wrapper">
+          <button class="carousel-btn carousel-prev" id="carouselPrev" aria-label="আগে">&#8249;</button>
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="carouselTrack">
+              <!-- Doctor cards injected by script.js -->
+            </div>
+          </div>
+          <button class="carousel-btn carousel-next" id="carouselNext" aria-label="পরে">&#8250;</button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+
+      <!-- Doctor Detail View (hidden by default) -->
+      <div id="doctor-detail-view" class="doctor-detail hidden">
+        <button class="btn-back" id="backBtn" aria-label="ডাক্তার তালিকায় ফিরুন">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12 4l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          তালিকায় ফিরুন
+        </button>
+        <div class="detail-card">
+          <div class="detail-photo-wrap">
+            <img id="detailPhoto" src="" alt="" class="detail-photo" />
+          </div>
+          <div class="detail-info">
+            <h3 id="detailName" class="detail-name"></h3>
+            <p id="detailDegree" class="detail-degree"></p>
+            <p id="detailSpecialty" class="detail-specialty"></p>
+            <div class="detail-meta">
+              <div class="meta-row" id="detailExperienceRow">
+                <span class="meta-label">কর্মস্থল</span>
+                <span id="detailExperience" class="meta-value"></span>
+              </div>
+              <div class="meta-row" id="detailBmdcRow">
+                <span class="meta-label">নিবন্ধন</span>
+                <span id="detailBmdc" class="meta-value"></span>
+              </div>
+              <div class="meta-row" id="detailDaysRow">
+                <span class="meta-label">রোগী দেখার দিন</span>
+                <span id="detailDays" class="meta-value"></span>
+              </div>
+              <div class="meta-row" id="detailTimeRow">
+                <span class="meta-label">সময়</span>
+                <span id="detailTime" class="meta-value"></span>
+              </div>
+              <div class="meta-row" id="detailFeeRow">
+                <span class="meta-label">ভিজিট ফি</span>
+                <span id="detailFee" class="meta-value"></span>
+              </div>
+              <div class="meta-row" id="detailChamberRow">
+                <span class="meta-label">চেম্বার</span>
+                <span id="detailChamber" class="meta-value"></span>
+              </div>
+            </div>
+            <a id="detailCallBtn" href="#" class="btn btn-primary detail-call-btn">কল করুন</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════ -->
+  <section class="section section-alt" id="services">
+    <div class="container">
+      <h2 class="section-title">আমাদের সেবাসমূহ</h2>
+      <p class="section-sub">সকল ধরনের স্বাস্থ্যসেবা এক ছাদের নিচে</p>
+      <div class="services-grid" id="servicesGrid">
+        <!-- Injected by script.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DIAGNOSTIC TESTS
+  ═══════════════════════════════════════ -->
+  <section class="section" id="diagnostic">
+    <div class="container">
+      <h2 class="section-title">আমাদের ডায়াগনস্টিক সেবা</h2>
+      <p class="section-sub">আধুনিক যন্ত্রপাতি ও দক্ষ প্রযুক্তিবিদ দ্বারা পরিচালিত</p>
+      <ul class="test-list" id="testList">
+        <!-- Injected by script.js -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       ADDRESS / MAP
+  ═══════════════════════════════════════ -->
+  <section class="section section-alt" id="address">
+    <div class="container address-inner">
+      <div class="address-text">
+        <h2 class="section-title">আমাদের ঠিকানা</h2>
+        <address class="address-block">
+          <p class="address-name">মার্ভেলাস টাওয়ার</p>
+          <p>ঢাকাদক্ষিণ রোড, গোলাপগঞ্জ, সিলেট</p>
+        </address>
+        <!-- Replace GOOGLE_MAPS_LINK_HERE with actual Google Maps URL -->
+        <a href="GOOGLE_MAPS_LINK_HERE" target="_blank" rel="noopener noreferrer" class="btn btn-outline map-btn">
+          <svg class="btn-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M10 2C7.24 2 5 4.24 5 7c0 4.25 5 11 5 11s5-6.75 5-11c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1110 5a1.5 1.5 0 010 3.5z" fill="currentColor"/>
+          </svg>
+          Google Maps-এ দেখুন
+        </a>
+      </div>
+      <div class="address-visual">
+        <div class="map-placeholder">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="35" r="18" stroke="currentColor" stroke-width="2"/>
+            <path d="M40 17C32.27 17 26 23.27 26 31c0 11.06 14 29 14 29s14-17.94 14-29c0-7.73-6.27-14-14-14zm0 19a5 5 0 110-10 5 5 0 010 10z" fill="currentColor" opacity=".15"/>
+            <path d="M40 17C32.27 17 26 23.27 26 31c0 11.06 14 29 14 29s14-17.94 14-29c0-7.73-6.27-14-14-14zm0 19a5 5 0 110-10 5 5 0 010 10z" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+          <p>মার্ভেলাস টাওয়ার<br/>গোলাপগঞ্জ, সিলেট</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════ -->
+  <section class="section contact-section" id="contact">
+    <div class="container contact-inner">
+      <h2 class="section-title">যোগাযোগ করুন</h2>
+      <p class="section-sub">আমরা সবসময় আপনার পাশে আছি</p>
+      <p class="contact-number">০১৩৩৭-২৭৩০৮৩</p>
+      <div class="contact-actions">
+        <a href="tel:01337273083" class="btn btn-primary">
+          <svg class="btn-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M3 5a2 2 0 012-2h1.5a1 1 0 011 .8l.7 3.5a1 1 0 01-.3.9L6.5 9.6c1.1 2.1 2.8 3.8 5 5l1.4-1.4a1 1 0 01.9-.3l3.5.7a1 1 0 01.8 1V16a2 2 0 01-2 2h-1C7.16 18 2 12.84 2 6V5a2 2 0 011-1.73V5z" fill="currentColor"/>
+          </svg>
+          এখনই কল করুন
+        </a>
+        <!-- WhatsApp placeholder — add number when ready -->
+        <!-- <a href="https://wa.me/88XXXXXXXXXX" target="_blank" rel="noopener" class="btn btn-outline whatsapp-btn">WhatsApp</a> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <svg class="logo-icon logo-icon-sm" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" stroke="currentColor" stroke-width="2"/>
+          <path d="M20 10v20M10 20h20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span>Elite Diagnostic Center &amp; Physiotherapy</span>
+      </div>
+      <p class="footer-address">মার্ভেলাস টাওয়ার, ঢাকাদক্ষিণ রোড, গোলাপগঞ্জ, সিলেট</p>
+      <p class="footer-copy">&copy; 2026 Elite Diagnostic Center &amp; Physiotherapy</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
